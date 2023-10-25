@@ -1,2 +1,2 @@
-# sandbox-game-dev
+# sandbox-threejs
 Testing stuffs
