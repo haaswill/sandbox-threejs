@@ -13,7 +13,9 @@
     "three": "^0.157.0"
   },
   "devDependencies": {
+    "@types/dat.gui": "^0.7.11",
     "@types/three": "^0.157.2",
+    "dat.gui": "^0.7.9",
     "ts-loader": "^9.5.0",
     "typescript": "^5.2.2",
     "webpack": "^5.89.0",
