@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import Stats from 'stats.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
@@ -6,6 +7,7 @@ class Main {
   private threejs: THREE.WebGLRenderer;
   private camera: THREE.PerspectiveCamera;
   private scene: THREE.Scene;
+  private stats: Stats | undefined;
 
   constructor() {
     this.threejs = new THREE.WebGLRenderer({
@@ -40,6 +42,7 @@ class Main {
     this.initializeTextures();
     this.initializePlane();
     this.initializeModel();
+    this.initializeStats();
 
     this.animate();
   }
@@ -105,6 +108,11 @@ class Main {
     });
   }
 
+  private initializeStats(): void {
+    this.stats = new Stats();
+    document.body.appendChild(this.stats.dom);
+  }
+
   private onWindowResize(): void {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
@@ -114,6 +122,7 @@ class Main {
   private animate(): void {
     requestAnimationFrame(() => {
       this.threejs.render(this.scene, this.camera);
+      this.stats?.update();
 
       this.animate();
     });
