@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 class Main {
   private threejs: THREE.WebGLRenderer;
@@ -38,17 +39,7 @@ class Main {
     this.initializeControls();
     this.initializeTextures();
     this.initializePlane();
-
-    const box = new THREE.Mesh(
-      new THREE.BoxGeometry(2, 2, 2),
-      new THREE.MeshStandardMaterial({
-        color: 0xffffff,
-      })
-    );
-    box.position.set(0, 1, 0);
-    box.castShadow = true;
-    box.receiveShadow = true;
-    this.scene.add(box);
+    this.initializeModel();
 
     this.animate();
   }
@@ -106,7 +97,19 @@ class Main {
     this.scene.add(plane);
   }
 
-  private onWindowResize(): void {}
+  private initializeModel(): void {
+    const loader = new GLTFLoader();
+    loader.load('assets/low-poly_wolf/scene.gltf', (gltf) => {
+      gltf.scene.scale.set(0.01, 0.01, 0.01);
+      this.scene.add(gltf.scene);
+    });
+  }
+
+  private onWindowResize(): void {
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+    this.threejs.setSize(window.innerWidth, window.innerHeight);
+  }
 
   private animate(): void {
     requestAnimationFrame(() => {
