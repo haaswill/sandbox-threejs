@@ -12,6 +12,7 @@
     "vite": "^4.4.5"
   },
   "dependencies": {
+    "draco3d": "^1.5.6",
     "three": "^0.158.0"
   }
 }
