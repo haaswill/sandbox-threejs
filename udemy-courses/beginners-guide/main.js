@@ -33,7 +33,17 @@ class Main {
 
     const geometry = this.createStarGeometry();
     // const geometry = this.createPolygonGeometry();
-    const material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+    // const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+    // const material = new THREE.MeshLambertMaterial({ color: 0xff0000 });
+    // const material = new THREE.MeshPhongMaterial({
+    //   color: 0xff0000,
+    //   specular: 0x444444,
+    //   shininess: 60,
+    // });
+    const material = new THREE.MeshStandardMaterial({
+      color: 0xff0000,
+      wireframe: true,
+    });
     this.mesh = new THREE.Mesh(geometry, material);
     this.scene.add(this.mesh);
 
