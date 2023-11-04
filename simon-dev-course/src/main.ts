@@ -4,15 +4,14 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 class Main {
-  private threejs: THREE.WebGLRenderer;
+  private threejs = new THREE.WebGLRenderer({
+    antialias: true,
+  });
   private camera: THREE.PerspectiveCamera;
-  private scene: THREE.Scene;
+  private scene = new THREE.Scene();
   private stats: Stats | undefined;
 
   constructor() {
-    this.threejs = new THREE.WebGLRenderer({
-      antialias: true,
-    });
     this.threejs.shadowMap.enabled = true;
     this.threejs.shadowMap.type = THREE.PCFSoftShadowMap;
     this.threejs.setPixelRatio(window.devicePixelRatio);
@@ -34,8 +33,6 @@ class Main {
     const far = 1000.0;
     this.camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     this.camera.position.set(75, 20, 0);
-
-    this.scene = new THREE.Scene();
 
     this.initializeLights();
     this.initializeControls();
